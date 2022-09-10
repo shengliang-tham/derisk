@@ -50,6 +50,25 @@ export const App = () => {
 
           const result = await response.json();
           setIpAddress(result.ipAddress);
+
+          chrome.runtime.onMessageExternal.addListener(function (
+            msg,
+            sender,
+            sendResponse
+          ) {
+            console.log("hehehehe");
+            console.log(document);
+            sendResponse({});
+          });
+
+          chrome.runtime.onMessage.addListener(function (
+            request,
+            sender,
+            sendResponse
+          ) {
+            console.log("h123");
+            sendResponse({});
+          });
         });
     };
 

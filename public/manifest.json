@@ -3,14 +3,15 @@
   "name": "Extension Name",
   "version": "0.1",
   "description": "Some Description",
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs", "storage", "activeTab", "webNavigation"],
   "background": {
     "scripts": ["static/js/background.js"]
   },
   "content_scripts": [
     {
       "js": ["static/js/content.js"],
-      "matches": ["http://*/*", "https://*/*"]
+      "matches": ["<all_urls>"],
+      "run_at": "document_start"
     }
   ],
   "icons": {
