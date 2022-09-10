@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import IPCheck from "./IPCheck";
+import OverallRating from "./OverallRating";
+import SCCheck from "./SCCheck";
+import URLCheck from "./URLCheck";
+import deriskLogo from "../../assets/derisk-logo.png";
 
 export const App = () => {
   const [hostname, setHostname] = useState<string>();
@@ -57,18 +62,22 @@ export const App = () => {
   }, []);
 
   return (
-    <>
-      <div className="header">
-        <div className="logo">
-          <img src="./images/logo.png" />
-        </div>
-        <div className="title">DeRisk</div>
+    <div className="p-4">
+      <div className="mb-6">
+        <img className="inline-block mr-4" src={deriskLogo} alt="derisk logo" />
+
+        <h1 className="inline-block font-sans text-lg tracking-widest font-semibold">
+          DeRisk
+        </h1>
       </div>
-      <div className="body">
-        <div className="url">URL : {hostname} ✔️ </div>
-        <div className="url">IP Address : {ipAddress} ✔️ </div>
+
+      <div>
+        <OverallRating />
+        <URLCheck hostname={hostname} />
+        <IPCheck ipAddress={ipAddress} />
+        <SCCheck />
       </div>
-    </>
+    </div>
   );
 };
 
