@@ -1,0 +1,3 @@
+[submodule "derisk-contracts"]
+	path = derisk-contracts
+	url = https://github.com/ExtremelySunnyYK/derisk-contracts.git
