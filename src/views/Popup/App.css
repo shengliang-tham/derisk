@@ -1,25 +1,6 @@
-img {
-  max-width: 100%;
-}
-
-.header {
-  background-color: #f2f5f6;
-  height: 80px;
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-  align-items: center;
-  justify-items: center;
-}
-
-.body {
-  height: 100px;
-  padding-left: 10%;
-  padding-right: 10%;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  font-size: 12px;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
@@ -28,11 +9,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 300px;
-  height: 400px;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  width: 357px;
+  height: 600px;
 }
