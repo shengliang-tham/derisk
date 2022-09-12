@@ -6,7 +6,7 @@ const OverallRating = () => {
   const [risk, setRisk] = useState(26);
 
   return (
-    <div className="flex p-4 mb-4 bg-gradient-to-r from-[#eaafb1] to-white rounded-xl shadow-2xl">
+    <div className="flex items-center p-4 mb-4 bg-gradient-to-r from-[#eaafb1] to-white rounded-xl shadow-2xl">
       <div className="p-4 mr-4">
         <CircularProgressbar
           value={risk}
