@@ -15,7 +15,7 @@ const IPCheck = ({ ipAddress }: any) => {
       </div>
 
       <div className="p-4 bg-red-200 rounded-xl">
-        <div className="font-semibold">IP Address : 112.5.763.216 </div>
+        <div className="font-semibold">IP Address : {ipAddress} </div>
         <div className="text-sm">
           Current IP address assigned is different from previous IP address of
           130.7.213.776 .

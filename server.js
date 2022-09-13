@@ -18,14 +18,15 @@ app.use(
 app.use(bodyParser.json());
 
 app.post("/ping", (req, res) => {
-  const domain = req.body["domain"];
-  dns.resolve4(domain, (err, addresses) => {
+  const url = req.body["url"];
+  dns.resolve4(url, (err, addresses) => {
     if (err) {
       console.log(err);
       return;
     }
+    console.log(addresses[0]);
 
-    if (urls[domain] && urls[domain] === addresses[0]) {
+    if (urls[url] && urls[url] === addresses[0]) {
       res.json({
         ipAddress: addresses[0],
         valid: true,

@@ -3,7 +3,8 @@
   "name": "Extension Name",
   "version": "0.1",
   "description": "Some Description",
-  "permissions": ["tabs", "storage", "activeTab", "webNavigation"],
+  "permissions": ["tabs", "storage", "activeTab"],
+  "web_accessible_resources": ["static/js/script.js"],
   "background": {
     "scripts": ["static/js/background.js"]
   },
@@ -11,7 +12,8 @@
     {
       "js": ["static/js/content.js"],
       "matches": ["<all_urls>"],
-      "run_at": "document_start"
+      "run_at": "document_start",
+      "all_frames": true
     }
   ],
   "icons": {

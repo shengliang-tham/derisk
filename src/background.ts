@@ -1,3 +1,5 @@
+import { BROWSER_URL, CONTENT_URL } from "./types";
+
 chrome.tabs.onUpdated.addListener(
   async (
     tabId: number,
@@ -8,9 +10,31 @@ chrome.tabs.onUpdated.addListener(
 
     const tabs = await getBrowserTabs();
     const filteredTabs = filterMetaMask(tabs);
-    console.log(filteredTabs);
+
+    // chrome.tabs.sendMessage(tabId, {
+    //   type: CONTENT_URL,
+    // });
 
     if (filteredTabs.length > 0 && !checkExtensionPresented(tabs)) {
+      chrome.tabs.query(
+        {
+          active: true,
+          lastFocusedWindow: false,
+        },
+        (tabs) => {
+          // and use that tab to fill in out title and url
+          var tab = tabs[0];
+          console.log(tab.url);
+          alert(tab.url);
+
+          chrome.storage.sync.set({ originUrl: tab.url });
+        }
+      );
+
+      // chrome.runtime.sendMessage({
+      //   type: BROWSER_URL,
+      // });
+
       const windowOptions: chrome.windows.CreateData = {
         width: 360,
         height: 620,
@@ -23,35 +47,6 @@ chrome.tabs.onUpdated.addListener(
       await chrome.windows.create(windowOptions);
 
       const id = filteredTabs[0].id ? filteredTabs[0].id : 0;
-      chrome.runtime.sendMessage(
-        "mfneajfhkpdhiphhfcnlkhlcjddioppl",
-        { text: "report_back" },
-        (data) => {
-          console.log(data);
-        }
-      );
-
-      chrome.tabs.sendMessage(
-        tabId,
-        {
-          target: "app",
-          type: "setMessage",
-          body: "How are you",
-        },
-        (data) => {
-          console.log(data);
-        }
-      );
-
-      console.log("sendt");
-
-      //We have permission to access the activeTab, so we can call chrome.tabs.executeScript:
-      const modifyDOM = () => {
-        //You can play with your DOM here or check URL against your regex
-        console.log("Tab script:");
-        console.log(document.body);
-        return document.body.innerHTML;
-      };
 
       // chrome.runtime.onMessageExternal.addListener(function (
       //   request,
@@ -108,22 +103,6 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       console.log(data);
     }
   );
-});
-
-chrome.runtime.onMessageExternal.addListener(
-  (request, sender, sendResponse) => {
-    console.log("Received message from " + sender + ": ", request);
-    sendResponse({ received: true }); //respond however you like
-  }
-);
-
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log("h123");
-  sendResponse({});
-});
-
-chrome.webNavigation.onHistoryStateUpdated.addListener(function (details) {
-  chrome.tabs.executeScript(1, { file: "contentscript.js" });
 });
 
 export {};

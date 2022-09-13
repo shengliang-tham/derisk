@@ -16,65 +16,37 @@ export const App = () => {
     "curve.fi": "76.76.21.21",
   };
 
+  async function getLocalStorageValue(key: string) {
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.storage.sync.get(key, function (value) {
+          resolve(value);
+        });
+      } catch (ex) {
+        reject(ex);
+      }
+    });
+  }
+
   useEffect(() => {
     const verifyURL = async () => {
-      const queryInfo = { active: true, lastFocusedWindow: true };
-      const url = "http://www.curve.fi/";
-      const domain = (new URL(url) as URL).hostname;
-      setHostname(domain);
+      const url = ((await getLocalStorageValue("originUrl")) as any)
+        .originUrl as string;
+      const formattedUrl = (new URL(url) as URL).hostname;
+      setHostname(formattedUrl);
 
-      const data = { domain: domain };
+      const body = { url: formattedUrl };
 
       const response = await fetch(`${API_URL}/ping`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(body),
       });
 
       const result = await response.json();
       setIpAddress(result.ipAddress);
-
-      chrome.tabs &&
-        chrome.tabs.query(queryInfo, async (tabs) => {
-          const url = tabs[0].url as string;
-          const domain = (new URL(url) as URL).hostname;
-          setHostname(domain);
-
-          console.log(domain);
-          const data = { domain: domain };
-
-          const response = await fetch(`${API_URL}/ping`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          });
-
-          const result = await response.json();
-          setIpAddress(result.ipAddress);
-
-          chrome.runtime.onMessageExternal.addListener(function (
-            msg,
-            sender,
-            sendResponse
-          ) {
-            console.log("hehehehe");
-            console.log(document);
-            sendResponse({});
-          });
-
-          chrome.runtime.onMessage.addListener(function (
-            request,
-            sender,
-            sendResponse
-          ) {
-            console.log("h123");
-            sendResponse({});
-          });
-        });
     };
 
     verifyURL();
