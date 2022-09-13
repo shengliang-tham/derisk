@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import infoIcon from "../../assets/info.svg";
+import { PYTHON_BACKEND_API_URL } from "../../constants";
 
 const SCCheck = () => {
   const [scAddress, setScAddress] = useState("");
 
   const handleChange = (e: any) => {
-    // todo
+    const target = e.target as HTMLInputElement;
+    setScAddress(target.value);
+  };
+
+  const validateSmartContract = async () => {
+    const body = {
+      contractAddress: scAddress,
+    };
+    const response = await fetch(`${PYTHON_BACKEND_API_URL}/validate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    const result = await response.json();
+    console.log(result);
   };
 
   return (
@@ -25,9 +43,9 @@ const SCCheck = () => {
         <div className="text-sm">
           Safeguard yourself and check before signing your wallet.
         </div>
-        <label htmlFor="scAddress">
+        <label htmlFor="scAddress" className="grid grid-cols-12 gap-4 ">
           <input
-            className="w-full px-3 py-1 rounded mt-1"
+            className="w-full px-3 py-1 rounded mt-1 col-span-8"
             type="text"
             id="scAddress"
             name="scAddress"
@@ -35,6 +53,13 @@ const SCCheck = () => {
             onChange={handleChange}
             value={scAddress}
           />
+          <button
+            type="button"
+            className="col-span-4 text-center inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            onClick={validateSmartContract}
+          >
+            Validate
+          </button>
         </label>
       </div>
     </div>

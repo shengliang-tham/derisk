@@ -5,12 +5,11 @@ import OverallRating from "./OverallRating";
 import SCCheck from "./SCCheck";
 import URLCheck from "./URLCheck";
 import deriskLogo from "../../assets/derisk-logo.png";
+import { NODE_BACKEND_API_URL } from "../../constants";
 
 export const App = () => {
   const [hostname, setHostname] = useState<string>();
   const [ipAddress, setIpAddress] = useState<string>();
-
-  const API_URL = "http://localhost:4200";
 
   const urls = {
     "curve.fi": "76.76.21.21",
@@ -37,7 +36,7 @@ export const App = () => {
 
       const body = { url: formattedUrl };
 
-      const response = await fetch(`${API_URL}/ping`, {
+      const response = await fetch(`${NODE_BACKEND_API_URL}/ping`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

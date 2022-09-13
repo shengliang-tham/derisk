@@ -1,4 +1,4 @@
-import { BROWSER_URL, CONTENT_URL } from "./types";
+import { EXTENSION_ID } from "./constants";
 
 chrome.tabs.onUpdated.addListener(
   async (
@@ -11,10 +11,6 @@ chrome.tabs.onUpdated.addListener(
     const tabs = await getBrowserTabs();
     const filteredTabs = filterMetaMask(tabs);
 
-    // chrome.tabs.sendMessage(tabId, {
-    //   type: CONTENT_URL,
-    // });
-
     if (filteredTabs.length > 0 && !checkExtensionPresented(tabs)) {
       chrome.tabs.query(
         {
@@ -22,18 +18,10 @@ chrome.tabs.onUpdated.addListener(
           lastFocusedWindow: false,
         },
         (tabs) => {
-          // and use that tab to fill in out title and url
-          var tab = tabs[0];
-          console.log(tab.url);
-          alert(tab.url);
-
+          const tab = tabs[0];
           chrome.storage.sync.set({ originUrl: tab.url });
         }
       );
-
-      // chrome.runtime.sendMessage({
-      //   type: BROWSER_URL,
-      // });
 
       const windowOptions: chrome.windows.CreateData = {
         width: 360,
@@ -41,24 +29,10 @@ chrome.tabs.onUpdated.addListener(
         left: 1080,
         top: 25,
         type: "popup",
-        url: `chrome-extension://mfneajfhkpdhiphhfcnlkhlcjddioppl/popup.html`,
+        url: `chrome-extension://${EXTENSION_ID}/popup.html`,
       };
 
       await chrome.windows.create(windowOptions);
-
-      const id = filteredTabs[0].id ? filteredTabs[0].id : 0;
-
-      // chrome.runtime.onMessageExternal.addListener(function (
-      //   request,
-      //   sender,
-      //   sendResponse
-      // ) {
-      //   console.log(request);
-      //   // receive the token and refresh token from commenty
-      //   if (request.credential) {
-      //     // do some stuff with request.credential
-      //   }
-      // });
     }
   }
 );
@@ -74,9 +48,7 @@ const filterMetaMask = (tabs: chrome.tabs.Tab[]) => {
 
 const checkExtensionPresented = (tabs: chrome.tabs.Tab[]) => {
   const result = tabs.filter((tab) =>
-    tab.url?.includes(
-      "chrome-extension://mfneajfhkpdhiphhfcnlkhlcjddioppl/popup.html"
-    )
+    tab.url?.includes(`chrome-extension://${EXTENSION_ID}/popup.html`)
   );
 
   return result.length > 0;
@@ -94,15 +66,5 @@ const getBrowserTabs = async () => {
     }
   });
 };
-
-chrome.browserAction.onClicked.addListener(function (tab) {
-  chrome.tabs.sendMessage(
-    tab.id ? tab.id : 0,
-    { text: "report_back" },
-    (data) => {
-      console.log(data);
-    }
-  );
-});
 
 export {};
