@@ -1,3 +1,4 @@
+import os
 import flask
 from slither.slither import Slither
 from slither.detectors import all_detectors
@@ -59,4 +60,5 @@ def validate():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=4300)
+    port = int(os.environ.get("PORT", 4300))
+    app.run(host="0.0.0.0", port=port)

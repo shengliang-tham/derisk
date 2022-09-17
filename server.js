@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const dns = require("dns");
-const port = 4200;
+const port = process.env.PORT || 4200;
 
 const urls = {
   "curve.fi": "76.76.21.21",
