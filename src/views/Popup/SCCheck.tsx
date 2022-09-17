@@ -24,6 +24,7 @@ const SCCheck = () => {
     });
 
     const result = await response.json();
+    console.log(result);
     setAlerts(result);
   };
 
