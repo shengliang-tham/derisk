@@ -21,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "yarn && python3 install -r requirements.txt",
+    "heroku-cleanup": "node server.js && python3 api.py"
   },
   "eslintConfig": {
     "extends": "react-app",
