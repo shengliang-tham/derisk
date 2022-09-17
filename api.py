@@ -55,7 +55,7 @@ def validate():
         print(tscores)
         return jsonify(tscores)
     except:
-        return ""
+        return {}
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ import { PYTHON_BACKEND_API_URL } from "../../constants";
 
 const SCCheck = () => {
   const [scAddress, setScAddress] = useState("");
+  const [alerts, setAlerts] = useState([]);
 
   const handleChange = (e: any) => {
     const target = e.target as HTMLInputElement;
@@ -23,7 +24,18 @@ const SCCheck = () => {
     });
 
     const result = await response.json();
-    console.log(result);
+    setAlerts(result);
+  };
+
+  const scAlert = (alert: any, index: number) => {
+    return (
+      <div className="border rounded bg-gray-200 my-2 p-1">
+        <div className="text-xs font-bold break-words">
+          Alert {index + 1}: {alert[0]?.check} ({alert[0]?.confidence})
+        </div>
+        <div className="text-xs break-words">{alert[0]?.description}</div>
+      </div>
+    );
   };
 
   return (
@@ -61,6 +73,8 @@ const SCCheck = () => {
             Validate
           </button>
         </label>
+
+        {alerts.map((alert, index) => scAlert(alert, index))}
       </div>
     </div>
   );
