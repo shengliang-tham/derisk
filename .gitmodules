@@ -1,3 +1,6 @@
 [submodule "derisk-contracts"]
 	path = derisk-contracts
 	url = https://github.com/ExtremelySunnyYK/derisk-contracts.git
+[submodule "derisk-python"]
+	path = derisk-python
+	url = https://github.com/shengliang-tham/derisk-python.git

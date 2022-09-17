@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Extension Name",
+  "name": "Derisk",
   "version": "0.1",
-  "description": "Some Description",
+  "description": "De-Risking DeFi for normies",
   "permissions": ["tabs", "storage", "activeTab"],
   "web_accessible_resources": ["static/js/script.js"],
   "background": {
@@ -17,13 +17,13 @@
     }
   ],
   "icons": {
-    "192": "logo192.png"
+    "192": "derisk-logo.png"
   },
   "browser_action": {
     "default_icon": {
-      "192": "logo192.png"
+      "192": "derisk-logo.png"
     },
-    "default_title": "Popup",
+    "default_title": "Derisk",
     "default_popup": "popup.html"
   },
   "options_ui": {
