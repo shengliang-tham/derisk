@@ -6,14 +6,15 @@ import SCCheck from "./SCCheck";
 import URLCheck from "./URLCheck";
 import deriskLogo from "../../assets/derisk-logo.png";
 import { NODE_BACKEND_API_URL } from "../../constants";
+import { IPAddress } from "../../types";
 
 export const App = () => {
   const [hostname, setHostname] = useState<string>();
-  const [ipAddress, setIpAddress] = useState<string>();
-
-  const urls = {
-    "curve.fi": "76.76.21.21",
-  };
+  const [ipAddress, setIpAddress] = useState<IPAddress>({
+    correctIpAddress: "",
+    detectedIpAddress: "",
+    valid: false,
+  });
 
   async function getLocalStorageValue(key: string) {
     return new Promise((resolve, reject) => {
@@ -45,7 +46,7 @@ export const App = () => {
       });
 
       const result = await response.json();
-      setIpAddress(result.ipAddress);
+      setIpAddress(result);
     };
 
     verifyURL();
@@ -64,7 +65,7 @@ export const App = () => {
       <div>
         <OverallRating />
         <URLCheck hostname={hostname} />
-        <IPCheck ipAddress={ipAddress} />
+        <IPCheck {...ipAddress} />
         <SCCheck />
       </div>
     </div>

@@ -8,6 +8,7 @@ const port = 4200;
 
 const urls = {
   "curve.fi": "76.76.21.21",
+  "faucet.metamask.io": "143.198.245.6",
 };
 
 app.use(
@@ -26,17 +27,22 @@ app.post("/ping", (req, res) => {
     }
     console.log(addresses[0]);
 
-    if (urls[url] && urls[url] === addresses[0]) {
-      res.json({
-        ipAddress: addresses[0],
-        valid: true,
-      });
-    } else {
-      res.json({
-        ipAddress: addresses[0],
-        valid: false,
-      });
-    }
+    const isValid = addresses[0] === urls[url];
+
+    // if (urls[url] && urls[url] === addresses[0]) {
+
+    // } else {
+    //   res.json({
+    //     ipAddress: addresses[0],
+    //     valid: false,
+    //   });
+    // }
+
+    res.json({
+      detectedIpAddress: addresses[0],
+      correctIpAddress: urls[url],
+      valid: isValid,
+    });
   });
 });
 
