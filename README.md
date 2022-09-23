@@ -1,37 +1,85 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-## Available Scripts
+  <h3 align="center">Chrome Extension</h3>
 
-In the project directory, you can run:
+  <p align="center">
+    A plugin to warn you of suspicious contract before you sign!
+    <br />
+  </p>
+</div>
 
-### `npm test`
+<!-- ABOUT THE PROJECT -->
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## About The Project
 
-### `npm run build`
+<div align="center">
+  <img src="images/screenshot-1.png" alt="Logo" width="500" height="650">
+  <img src="images/screenshot-2.png" alt="Logo" width="500" height="650">
+</div>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Problem
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+There has been many prominent web2 cyber attacks on popular protocols such as curve finance and cream finance which resulted in over 1B dollar. Common attacks are through DNS poisoning and phishing attacks which leads you to a fraduluent webpage to approve malicious contracts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Solution
 
-### `npm run eject`
+A chrome extension that will popup before approving metamask's transaction that informs users of the various factor
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- DNS of the website
+- IP Address of the website
+- Smart contract address of the transaction
+- Potential vulnerabilities of the smart contract
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The extension will compare these information against the information stored in our smart contract to determine the validity of the information.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Built With
 
-## Learn More
+- [![React][react.js]][react-url]
+- [![Tailwind CSS][tailwind css]][tailwind-url]
+- [![Solidity][solidity]][solidity-url]
+- [![Flask][flask]][flask-url]
+- [![NodeJS][nodejs]][nodejs-url]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# derisk
+### Building the extension
+
+1. Clone the repo
+2. Install the necessary dependencies through yarn
+
+```
+yarn
+```
+
+3. Run the build
+
+```
+yarn run build
+```
+
+4. Follow instructions [here](https://superuser.com/questions/247651/how-does-one-install-an-extension-for-chrome-browser-from-the-local-file-system) using the folder /build
+
+### Chrome Extension
+
+You can view it [here](https://chrome.google.com/webstore/detail/derisk/lkafnhjnkfolengjlhmceojlmjbbllof?hl=en-GB&authuser=0)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react-url]: https://reactjs.org/
+[tailwind css]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[tailwind-url]: https://tailwindcss.com/
+[solidity]: https://img.shields.io/badge/Solidity-e6e6e6?style=for-the-badge&logo=solidity&logoColor=black
+[solidity-url]: https://soliditylang.org/
+[flask]: https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white
+[flask-url]: https://flask.palletsprojects.com/en/2.2.x/
+[nodejs]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
+[nodejs-url]: https://nodejs.org/en/
