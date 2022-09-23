@@ -18,8 +18,9 @@
 ## About The Project
 
 <div align="center">
-  <img src="images/screenshot-1.png" alt="Logo" width="500" height="650">
-  <img src="images/screenshot-2.png" alt="Logo" width="500" height="650">
+  <img src="images/screenshot-1.png" alt="Logo" width="250">
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="images/screenshot-2.png" alt="Logo" width="250">
 </div>
 
 ### Problem
